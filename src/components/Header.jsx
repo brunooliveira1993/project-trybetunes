@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getUser } from '../userAPI';
+import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
 
 export default class Header extends Component {

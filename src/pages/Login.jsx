@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
-import Carregando from '../services/components/Carregando';
+import Carregando from '../components/Carregando';
 
 export default class Login extends Component {
   state = {

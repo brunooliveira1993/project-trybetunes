@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Carregando from '../services/components/Carregando';
-import Header from '../services/components/Header';
+import Carregando from '../components/Carregando';
+import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 export default class Search extends Component {
@@ -36,7 +36,7 @@ export default class Search extends Component {
       event.preventDefault();
       this.setState({
         loading: true,
-        artistSearch: search,
+        artistSearch: `Resultado de álbuns de: ${search}`,
       });
       const albumList = await searchAlbumsAPI(search);
       if (albumList.length === 0) {
@@ -57,17 +57,18 @@ export default class Search extends Component {
     };
 
     const renderList = arr.map((album) => (
-      <Link
-        data-testid={ `link-to-album-${album.collectionId}` }
-        key={ album.collectionId }
-        to={ `/album/${album.collectionId}` }
-      >
-        <li>
-          <p>{album.artistName}</p>
-          <img src={ album.artworkUrl100 } alt="" />
-          <p>{album.collectionName}</p>
-        </li>
-      </Link>
+      <ol key={ album.collectionId }>
+        <Link
+          data-testid={ `link-to-album-${album.collectionId}` }
+          to={ `/album/${album.collectionId}` }
+        >
+          <li>
+            <p>{album.artistName}</p>
+            <img src={ album.artworkUrl100 } alt="" />
+            <p>{album.collectionName}</p>
+          </li>
+        </Link>
+      </ol>
     ));
 
     return (
@@ -108,15 +109,16 @@ export default class Search extends Component {
           }
           {
             resultEnable && (
-              <p>
-                Resultado de álbuns de:
-                {artistSearch}
-              </p>
+              <div>
+                <p>
+                  {artistSearch}
+                </p>
+                <ol>
+                  {renderList}
+                </ol>
+              </div>
             )
           }
-          <ol>
-            {renderList}
-          </ol>
         </div>
       </div>
     );
