@@ -29,7 +29,6 @@ export const getFavoriteSongs = () => new Promise((resolve) => {
 });
 
 export const addSong = (song) => new Promise((resolve) => {
-  // console.log('ok');
   if (song) {
     const favoriteSongs = readFavoriteSongs();
     saveFavoriteSongs([...favoriteSongs, song]);
